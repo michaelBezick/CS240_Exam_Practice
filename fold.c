@@ -6,6 +6,8 @@ typedef struct node {
   struct node* next;
 } node;
 
+void* fold(node*, void*, void* (*f) (void*));
+
 int main(void) {
 
   return 0;
@@ -13,4 +15,10 @@ int main(void) {
 
 void* fold(node* n, void* acc, void* (*f) (void*)) {
   return NULL;
+}
+
+void* add(void* a, void* b) {
+  int* val = malloc(sizeof(int));
+  *val = (*((int*) a) + *((int*) b));
+  return val;
 }
