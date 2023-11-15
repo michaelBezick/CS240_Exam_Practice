@@ -6,8 +6,9 @@ typedef struct node {
   struct node* next;
 } node;
 
-void* fold(node*, void*, void* (*f) (void*));
+void* fold(node*, void*, void* (*f) (void*, void*));
 void print_list(node* head);
+void* add(void*, void*);
 
 int main(void) {
   node* head = malloc(sizeof(node));
@@ -29,12 +30,22 @@ int main(void) {
   }
 
   print_list(head);
+  printf("--------------------------------------------------\n");
+  int* temp = malloc(sizeof(int));
+  *temp = 0;
+  int* val = fold(head, temp, add);
+  printf("%d\n", *val);
 
   return 0;
 }
 
-void* fold(node* n, void* acc, void* (*f) (void*)) {
-  return NULL;
+void* fold(node* n, void* acc, void* (*f) (void*, void*)) {
+  if (n == NULL) {
+    return acc;
+  }
+  else {
+    return fold(n->next, f(n->data, acc), f);
+  }
 }
 
 void* add(void* a, void* b) {
