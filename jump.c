@@ -16,6 +16,7 @@ int main(void) {
 
   int i = setjmp(env);
   if (i == 1) {
+    printf("a;lldskfjaj;sdlkj\n");
     exit(0);
   }
   else {
