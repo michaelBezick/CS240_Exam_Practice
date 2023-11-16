@@ -51,6 +51,7 @@ int dequeue(Queue* q) {
   q->front = temp->next;
 
   free(temp);
+  temp = NULL;
 
   return val;
 }
