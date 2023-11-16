@@ -34,8 +34,15 @@ int main(void) {
 void enqueue(Queue* q, int val) {
   node* new_node = malloc(sizeof(node));
   new_node->val = val;
-  new_node->next = q->end;
+  new_node->next = NULL;
+  if (q->end == NULL) {
+    q->end = new_node;
+    q->front = new_node;
+    return;
+  }
+  q->end->next = new_node;
   q->end = new_node;
+  return;
 }
 
 int dequeue(Queue* q) {
