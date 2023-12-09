@@ -1,6 +1,10 @@
-#include "map.h"
 #include <stdio.h>
-#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+  void* data;
+  struct Node* next;
+} Node;
 
 void print_list(Node*);
 
