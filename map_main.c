@@ -12,11 +12,15 @@ int main(void) {
   
   Node* head = malloc(sizeof(Node));
   head->data = malloc(sizeof(int));
+  head->next = NULL;
   *((int*) head->data) = 0;
   Node* cur = head;
+
   for (int i = 0; i < 10; i++) {
     Node* new_node = malloc(sizeof(Node));
-    *((int*) new_node->data) = i;
+    new_node->data = malloc(sizeof(int));
+    new_node->next = NULL;
+    *((int*) (new_node->data)) = i;
     cur->next = new_node;
     cur = new_node;
   }
