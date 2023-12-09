@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node {
-  void* data;
-  struct node* next;
-} Node;
-
+#include "map.h"
 
 void add_five(int* a) {
   *a += 5;

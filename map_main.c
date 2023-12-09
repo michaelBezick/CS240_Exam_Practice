@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "map.c"
+#include "map.h"
 
 void print_list(Node*);
 
