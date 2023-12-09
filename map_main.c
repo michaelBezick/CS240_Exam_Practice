@@ -7,6 +7,8 @@ typedef struct Node {
 } Node;
 
 void print_list(Node*);
+void map(Node* head, void (*change) (void*)); 
+void add_five(void* a);
 
 int main(void) {
   
@@ -25,6 +27,14 @@ int main(void) {
     cur = new_node;
   }
 
+  print_list(head);
+
+  printf("--------------------------------------------------\n");
+
+  map(head, add_five);
+
+  print_list(head);
+
   return 0;
 }
 
@@ -35,11 +45,17 @@ void print_list(Node* head) {
   }
 }
 
-void add_five(int* a) {
-  *a += 5;
+void add_five(void* a) {
+
+  *((int*) a) += 5;
 }
 
-Node* map(Node* head, void (*change) (void*)) {
+void map(Node* head, void (*change) (void*)) {
 
-  return NULL;
+  Node* cur = head;
+  
+  while (cur) {
+    change(cur->data);
+    cur = cur->next;
+  }
 }
