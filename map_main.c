@@ -1,7 +1,7 @@
+#include "map.h"
 #include <stdio.h>
 #include <stdio.h>
 
-#include "map.h"
 
 void print_list(Node*);
 

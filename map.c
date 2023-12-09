@@ -1,7 +1,7 @@
+#include "map.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "map.h"
 
 void add_five(int* a) {
   *a += 5;
