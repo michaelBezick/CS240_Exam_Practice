@@ -5,6 +5,5 @@ push:
 
 compile:
 	gcc -g -o main map_main.c
-
-run:
 	./main.exe
+

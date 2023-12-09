@@ -16,7 +16,7 @@ int main(void) {
   *((int*) head->data) = 0;
   Node* cur = head;
 
-  for (int i = 0; i < 10; i++) {
+  for (int i = 1; i < 10; i++) {
     Node* new_node = malloc(sizeof(Node));
     new_node->data = malloc(sizeof(int));
     new_node->next = NULL;
