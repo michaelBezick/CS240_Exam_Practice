@@ -25,8 +25,6 @@ int main(void) {
     cur = new_node;
   }
 
-  print_list(head);
-
   return 0;
 }
 
