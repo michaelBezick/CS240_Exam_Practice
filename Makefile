@@ -4,5 +4,5 @@ push:
 	git push
 
 compile:
-	gcc -g -o map map.c -lm
 	gcc -g -o main map_main.c -lm
+	gcc -g -o map map.c -lm

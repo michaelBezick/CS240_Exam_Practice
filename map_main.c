@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdio.h>
 
-
 void print_list(Node*);
 
 int main(void) {
