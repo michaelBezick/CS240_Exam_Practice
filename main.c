@@ -9,6 +9,8 @@ typedef struct Node {
 void print_list(Node*);
 void map(Node* head, void (*change) (void*)); 
 void add_five(void* a);
+void* fold(Node* head, void* acc, void* acc_fn(void*, void*));
+void* additive_accumulate(void*, void*);
 
 int main(void) {
   
@@ -31,9 +33,10 @@ int main(void) {
 
   printf("--------------------------------------------------\n");
 
-  map(head, add_five);
-
-  print_list(head);
+  int* start_acc = malloc(sizeof(int));
+  *start_acc = 0;
+  int* end_acc = fold(head, start_acc, additive_accumulate);
+  printf("%d\n", *end_acc);
 
   return 0;
 }
@@ -58,4 +61,20 @@ void map(Node* head, void (*change) (void*)) {
     change(cur->data);
     cur = cur->next;
   }
+}
+
+void* fold(Node* head, void* acc, void* acc_fn(void*, void*)) {
+  Node* cur = head;
+  if (!cur) {
+    return acc; 
+  }
+  else {
+    return fold(cur->next, acc_fn(cur->data, acc), acc_fn);
+  }
+}
+
+
+void* additive_accumulate(void* val, void* acc) {
+  *((int*) acc) += *((int*) val);
+  return acc;
 }
