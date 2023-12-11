@@ -22,9 +22,18 @@ void print_list_backward(Node* end) {
   }
 }
 
-int is_palindrome(Node* head) {
+int is_palindrome(Node* head, Node* end) {
+  while (head <= end) {
+    if (*((int*) head->data) != *((int*) end->data)) {
+      return 0;
+    }
+    else {
+      head = head->next;
+      end = end->previous;
+    }
+  }
 
-  return 0;
+  return 1;
 }
 
 
@@ -39,21 +48,22 @@ int main(void) {
   Node* cur = head;
   Node* end;
 
-  for (int i = 1; i < 10; i++) {
+  for (int i = 1; i < 11; i++) {
     Node* new_node = malloc(sizeof(Node));
     new_node->data = malloc(sizeof(int));
     new_node->next = NULL;
     new_node->previous = cur;
-    *((int*) (new_node->data)) = i;
+    *((int*) (new_node->data)) = i % 2;
     cur->next = new_node;
     cur = new_node;
     end = cur;
   }
 
-//  print_list_forward(head);
+  print_list_forward(head);
   print_list_backward(end);
 
   printf("--------------------------------------------------\n");
+  printf("Is palindrome: %d\n", is_palindrome(head, end));
 
   return 0;
 
