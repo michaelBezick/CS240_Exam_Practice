@@ -4,6 +4,5 @@ push:
 	git push
 
 run:
-	gcc -g -o main main.c
-	./main.exe
-
+	gcc -g -o palindrome is_palindrome.c
+	./palindrome.exe

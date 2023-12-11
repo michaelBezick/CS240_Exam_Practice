@@ -9,8 +9,10 @@ typedef struct Node {
 void print_list(Node*);
 void map(Node* head, void (*change) (void*)); 
 void add_five(void* a);
-void* fold(Node* head, void* acc, void* acc_fn(void*, void*));
-void* additive_accumulate(void*, void*);
+void fold(Node* head, void* acc, void acc_fn(void*, void*));
+void additive_accumulate(void*, void*);
+Node* map2(Node* head, void* (*change) (void*));
+void* add_five2(void* val);
 
 int main(void) {
   
@@ -33,10 +35,9 @@ int main(void) {
 
   printf("--------------------------------------------------\n");
 
-  int* start_acc = malloc(sizeof(int));
-  *start_acc = 0;
-  int* end_acc = fold(head, start_acc, additive_accumulate);
-  printf("%d\n", *end_acc);
+  Node* new_list = map2(head, add_five2);
+
+  print_list(new_list);
 
   return 0;
 }
@@ -53,6 +54,12 @@ void add_five(void* a) {
   *((int*) a) += 5;
 }
 
+void* add_five2(void* val) {
+  int* new_val = malloc(sizeof(int));
+  *new_val = *((int*) val) + 5;
+  return new_val;
+}
+
 void map(Node* head, void (*change) (void*)) {
 
   Node* cur = head;
@@ -63,18 +70,30 @@ void map(Node* head, void (*change) (void*)) {
   }
 }
 
-void* fold(Node* head, void* acc, void* acc_fn(void*, void*)) {
-  Node* cur = head;
-  if (!cur) {
-    return acc; 
+Node* map2(Node* head, void* (*change) (void*)) {
+  if (head == NULL) {
+    return NULL;
   }
   else {
-    return fold(cur->next, acc_fn(cur->data, acc), acc_fn);
+    Node* new_node = malloc(sizeof(Node));
+    new_node->data = change(head->data); 
+    new_node->next = map2(head->next, change);
+    return new_node;
+  }
+}
+
+void fold(Node* head, void* acc, void acc_fn(void*, void*)) {
+  Node* cur = head;
+  if (!cur) {
+    return; 
+  }
+  else {
+    acc_fn(cur->data, acc);
+    return fold(cur->next, acc, acc_fn);
   }
 }
 
 
-void* additive_accumulate(void* val, void* acc) {
+void additive_accumulate(void* val, void* acc) {
   *((int*) acc) += *((int*) val);
-  return acc;
 }
